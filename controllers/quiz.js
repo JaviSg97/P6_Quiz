@@ -155,73 +155,8 @@ exports.check = (req, res, next) => {
 };
 
 exports.randomplay = (req, res, next) => {
-    /*req.session.randomPlay = req.session.randomPlay || [];
-    
-    const score = req.session.randomPlay.length;
 
-    const whereOpt = {id: {[Sequelize.Op.notIn] : req.session.randomPlay}} ;
 
-    models.quiz.count({where:whereOpt})
-
-   .then(count => {
-       return models.quiz.findAll({
-            where: whereOpt,
-            offset: Math.floor(Math.random()*count),
-            limit:1
-         })
-
-       .then(quizzes => {
-            return quizzes[0];
-        })
-   })
-
-    .then(quiz => {
-        if(quiz === undefined) {
-            req.session.randomPlay = [];
-            res.render('quizzes/random_nomore', {
-                score: score
-            });
-        } else {
-            res.render('quizzes/random_play', {
-                quiz: quiz,
-                score: score
-            });
-        }
-    })
-
-    .catch(error => next(error));
-
-};*/
-
-req.session.randomPlay = req.session.randomPlay || [];
-   /* const whereOpt = {'id':{[Sequelize.Op.notIn]: req.session.randomPlay}};
-    models.quiz.count({where: whereOpt})
-        .then(count => {
-            if (!count) {
-                const score = req.session.randomPlay.length;
-                req.session.randomPlay = [];
-                res.render('quizzes/random_nomore', {
-                    score: score
-                });
-            }
-            ;
-            return models.quiz.findAll({
-                where: whereOpt,
-                offset: Math.floor(Math.random() * count),
-                limit: 1
-            })
-        })
-        .then(quiz => {
-            res.render('quizzes/random_play', {
-                quiz: quiz[0],
-                score: req.session.randomPlay.length
-            });
-        })
-        .catch(error => {
-            next(error);
-        });
-    
-};*/
  if (!req.session.randomPlay){req.session.randomPlay = [];}
 
     models.quiz.count({where: {id: {[Sequelize.Op.notIn]: req.session.randomPlay}}})
